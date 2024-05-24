@@ -1,0 +1,16 @@
+# Weather App
+
+This is a simple Python script to fetch and display current weather data for a given location using the OpenWeatherMap API.
+
+## Setup
+
+1. Sign up for a free API key from [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
+2. Replace `YOUR_API_KEY_HERE` in the script with your actual API key.
+
+## Usage
+
+1. Run the script.
+2. Enter the name of the city when prompted.
+
+```sh
+python weather_app.py
