@@ -1,12 +1,3 @@
-                 _      _   _       
-                | |    | | | |      
- _ __ ___  _   _| | ___| |_| |_ ___ 
-| '__/ _ \| | | | |/ _ \ __| __/ _ \
-| | | (_) | |_| | |  __/ |_| ||  __/
-|_|  \___/ \__,_|_|\___|\__|\__\___|
-
-
-
 This is a Python program to simulate spins on a European roulette wheel. The program allows you to specify the number of spins and provides statistics on various outcomes.
 
 ## Features
@@ -20,6 +11,3 @@ This is a Python program to simulate spins on a European roulette wheel. The pro
    ```bash
    git clone https://github.com/yourusername/roulette-simulation.git
    cd roulette-simulation
-
-
-## ASCII art was taken from: https://ascii.co.uk/art/roulette 
