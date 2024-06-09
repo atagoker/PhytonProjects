@@ -7,56 +7,70 @@ black_numbers = {2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33,
 even_numbers = set(range(2, 37, 2))
 odd_numbers = set(range(1, 36, 2))
 
+
 def spin_roulette(spins):
     results = Counter()
-    
+
     for _ in range(spins):
         number = random.choice(numbers)
-        
+
         results[number] += 1
-        
+
         if number in red_numbers:
             results['red'] += 1
         elif number in black_numbers:
             results['black'] += 1
-            
+
         if number in even_numbers:
             results['even'] += 1
         elif number in odd_numbers:
             results['odd'] += 1
-        
+
         if 1 <= number <= 18:
             results['1-18'] += 1
         elif 19 <= number <= 36:
             results['19-36'] += 1
-        
+
         if 1 <= number <= 12:
             results['1st 12'] += 1
         elif 13 <= number <= 24:
             results['2nd 12'] += 1
         elif 25 <= number <= 36:
             results['3rd 12'] += 1
-            
+
         if number % 3 == 0:
             results['2 to 1, 3rd col'] += 1
         elif number % 3 == 1:
             results['2 to 1, 1st col'] += 1
         elif number % 3 == 2:
             results['2 to 1, 2nd col'] += 1
-            
+
     return results
+
 
 def main():
     spins = int(input("Enter the number of spins (1000, 10000, 100000, 1000000): "))
     if spins not in [1000, 10000, 100000, 1000000]:
         print("Invalid number of spins.")
         return
-    
+
     results = spin_roulette(spins)
-    
+
     print(f"Results after {spins} spins:")
-    for key in sorted(results.keys()):
+
+    numeric_keys = sorted(k for k in results.keys() if isinstance(k, int))
+    string_keys = sorted(k for k in results.keys() if isinstance(k, str))
+
+    for key in numeric_keys + string_keys:
         print(f"{key}: {results[key]}")
+
+    number_results = {k: results[k] for k in numeric_keys}
+    max_number = max(number_results, key=number_results.get)
+    min_number = min(number_results, key=number_results.get)
+
+    print(f"\nNumber that appeared the most: {max_number} ({results[max_number]} times)")
+    print(f"Number that appeared the least: {min_number} ({results[min_number]} times)")
+
 
 if __name__ == "__main__":
     main()
