@@ -1,0 +1,184 @@
+import random
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+# Define the deck of cards
+suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
+values = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
+          'Jack': 10, 'Queen': 10, 'King': 10, 'Ace': 11}
+
+deck = [{'rank': rank, 'suit': suit, 'value': values[rank]} for suit in suits for rank in ranks]
+random.shuffle(deck)
+
+
+# Function to calculate the score of a hand
+def calculate_score(hand):
+    score = sum(card['value'] for card in hand)
+    aces = sum(card['rank'] == 'Ace' for card in hand)
+
+    while score > 21 and aces:
+        score -= 10
+        aces -= 1
+
+    return score
+
+
+# Function to display the hand
+def display_hand(hand, title, position, show_all=True):
+    ax = plt.gca()
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 10)
+    ax.add_patch(patches.Rectangle((position, 5), 4, 1, edgecolor='black', facecolor='white'))
+    for i, card in enumerate(hand):
+        if not show_all and i == 1:
+            plt.text(position + 0.1 + i * 0.3, 5.5, "Hidden", fontsize=10)
+        else:
+            plt.text(position + 0.1 + i * 0.3, 5.5, f"{card['rank']} of {card['suit']}", fontsize=10)
+    plt.text(position, 4.5, f"{title} Score: {calculate_score(hand) if show_all else '?'}", fontsize=12)
+    plt.axis('off')
+
+
+# Function to deal a card
+def deal_card():
+    return deck.pop()
+
+
+# Initialize player's money and betting chips
+player_money = 1000
+chips = [25, 50, 100, 500]
+
+# Game loop
+while player_money > 0:
+    # Player places a bet
+    bet = 0
+    while bet not in chips:
+        bet = int(input(f"Place your bet ({chips}): "))
+    if bet > player_money:
+        print("You don't have enough money for that bet.")
+        continue
+
+    player_money -= bet
+
+    # Initialize hands
+    player_hand = [deal_card(), deal_card()]
+    dealer_hand = [deal_card(), deal_card()]
+
+    # Display initial hands
+    plt.figure(figsize=(10, 8))
+    display_hand(player_hand, "Player", 0)
+    display_hand(dealer_hand, "Dealer", 5, show_all=False)
+    plt.show()
+
+    # Check for initial blackjack
+    if calculate_score(player_hand) == 21:
+        print("Blackjack! Player wins 1.5x the bet.")
+        player_money += bet * 2.5
+        continue
+
+    # Player's turn
+    while calculate_score(player_hand) < 21:
+        action = input("Do you want to 'hit', 'stand', 'double' or 'split'? ")
+        if action == 'hit':
+            player_hand.append(deal_card())
+            plt.figure(figsize=(10, 8))
+            display_hand(player_hand, "Player", 0)
+            display_hand(dealer_hand, "Dealer", 5, show_all=False)
+            plt.show()
+        elif action == 'stand':
+            break
+        elif action == 'double':
+            if player_money >= bet:
+                player_money -= bet
+                bet *= 2
+                player_hand.append(deal_card())
+                plt.figure(figsize=(10, 8))
+                display_hand(player_hand, "Player", 0)
+                display_hand(dealer_hand, "Dealer", 5, show_all=False)
+                plt.show()
+                break
+            else:
+                print("You don't have enough money to double down.")
+        elif action == 'split' and player_hand[0]['rank'] == player_hand[1]['rank']:
+            if player_money >= bet:
+                player_money -= bet
+                second_hand = [player_hand.pop()]
+                player_hand.append(deal_card())
+                second_hand.append(deal_card())
+                print("Playing first hand:")
+                plt.figure(figsize=(10, 8))
+                display_hand(player_hand, "Player Hand 1", 0)
+                display_hand(dealer_hand, "Dealer", 5, show_all=False)
+                plt.show()
+                while calculate_score(player_hand) < 21:
+                    action = input("Do you want to 'hit' or 'stand' on the first hand? ")
+                    if action == 'hit':
+                        player_hand.append(deal_card())
+                        plt.figure(figsize=(10, 8))
+                        display_hand(player_hand, "Player Hand 1", 0)
+                        display_hand(dealer_hand, "Dealer", 5, show_all=False)
+                        plt.show()
+                    elif action == 'stand':
+                        break
+                print("Playing second hand:")
+                plt.figure(figsize=(10, 8))
+                display_hand(second_hand, "Player Hand 2", 0)
+                display_hand(dealer_hand, "Dealer", 5, show_all=False)
+                plt.show()
+                while calculate_score(second_hand) < 21:
+                    action = input("Do you want to 'hit' or 'stand' on the second hand? ")
+                    if action == 'hit':
+                        second_hand.append(deal_card())
+                        plt.figure(figsize=(10, 8))
+                        display_hand(second_hand, "Player Hand 2", 0)
+                        display_hand(dealer_hand, "Dealer", 5, show_all=False)
+                        plt.show()
+                    elif action == 'stand':
+                        break
+                break
+            else:
+                print("You don't have enough money to split.")
+        else:
+            print("Invalid action or conditions not met for split/double.")
+
+    # Dealer's turn
+    while calculate_score(dealer_hand) < 17:
+        dealer_hand.append(deal_card())
+
+    # Determine the winner for single hand
+    player_score = calculate_score(player_hand)
+    dealer_score = calculate_score(dealer_hand)
+
+    plt.figure(figsize=(10, 8))
+    display_hand(player_hand, "Player", 0)
+    display_hand(dealer_hand, "Dealer", 5)
+    plt.show()
+
+    if player_score > 21:
+        print("Player busts! Dealer wins.")
+    elif dealer_score > 21 or player_score > dealer_score:
+        print("Player wins!")
+        player_money += bet * 2
+    elif player_score < dealer_score:
+        print("Dealer wins!")
+    else:
+        print("It's a tie!")
+        player_money += bet
+
+    # Determine the winner for split hands (if applicable)
+    if 'second_hand' in locals():
+        player_score = calculate_score(second_hand)
+        if player_score > 21:
+            print("Second hand busts! Dealer wins.")
+        elif dealer_score > 21 or player_score > dealer_score:
+            print("Second hand wins!")
+            player_money += bet * 2
+        elif player_score < dealer_score:
+            print("Dealer wins second hand!")
+        else:
+            print("Second hand ties!")
+            player_money += bet
+
+    print(f"Player's remaining money: ${player_money}")
+
+print("Game over! You are out of money.")
