@@ -1,0 +1,70 @@
+
+## Tic-Tac-Toe Game
+
+This is a simple console-based Tic-Tac-Toe game implemented in Python. The game allows a human player to play against a basic AI opponent that makes random moves.
+
+## How to Play
+
+1. Clone the repository or download the `tic_tac_toe.py` file.
+2. Run the game using Python.
+3. The player is prompted to enter the row and column numbers (0, 1, or 2) for their move.
+4. The AI opponent makes a random move.
+5. The game alternates between the player and the AI until there is a winner or the board is full, resulting in a draw.
+
+## Requirements
+
+- Python 3.x
+
+## Running the Game
+
+1. Ensure you have Python 3.x installed on your system.
+2. Clone this repository or download the `tic_tac_toe.py` file.
+3. Open a terminal or command prompt and navigate to the directory containing `tic_tac_toe.py`.
+4. Run the game with the following command:
+   ```bash
+   python tic_tac_toe.py
+   ```
+
+## Game Rules
+
+- The game is played on a 3x3 grid.
+- Players take turns to place their mark (X or O) in an empty cell.
+- The first player to get 3 of their marks in a row (vertically, horizontally, or diagonally) wins the game.
+- If all 9 cells are filled and no player has 3 marks in a row, the game ends in a draw.
+
+## Example Gameplay
+
+```
+ |   |  
+-----
+ |   |  
+-----
+ |   |  
+
+Enter the row (0-2): 1
+Enter the column (0-2): 1
+  |   |  
+-----
+  | X |  
+-----
+  |   |  
+
+AI chose cell: (2, 2)
+  |   |  
+-----
+  | X |  
+-----
+  |   | O
+```
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Contributing
+
+Feel free to submit issues and enhancement requests.
+
+## Contact
+
+If you have any questions or suggestions, please open an issue or contact the repository owner.
