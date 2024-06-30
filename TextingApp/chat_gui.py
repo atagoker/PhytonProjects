@@ -82,7 +82,7 @@ class ChatClient:
     def setup_connection(self):
         if not self.client_socket:
             self.username = simpledialog.askstring("Username", "Enter your username:", parent=self.master)
-            host = simpledialog.askstring("Server IP", "Enter server IP:", initialvalue='192.168.1.19', parent=self.master)
+            host = simpledialog.askstring("Server IP", "Enter server IP:", initialvalue='your IP address here', parent=self.master)
             port = simpledialog.askinteger("Server Port", "Enter server port:", initialvalue=12345, parent=self.master)
             if host and port and self.username:
                 try:
