@@ -157,7 +157,7 @@ class Server:
 
 if __name__ == "__main__":
     try:
-        HOST, PORT = '192.168.1.19', 12345  # Updated initial IP address
+        HOST, PORT = 'your IP address', 12345  # Updated initial IP address
         server = Server(HOST, PORT)
         server.start()
     except Exception as e:
