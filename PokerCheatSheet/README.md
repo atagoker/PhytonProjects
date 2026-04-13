@@ -1,6 +1,6 @@
 # Poker Cheat Sheet 
 
-A zero-dependency Texas Hold'em hand evaluator and equity calculator in pure Python. Evaluate hands, find the best 5-card combo from 7 cards, and run Monte Carlo equity simulations — all from the command line or as an importable module.
+A zero-dependency Texas Hold'em hand evaluator and equity calculator in pure Python. Evaluate hands, find the best 5-card combo from 7 cards, and run Monte Carlo equity simulations, all from the command line or as an importable module.
 
 ---
 
@@ -25,8 +25,8 @@ A zero-dependency Texas Hold'em hand evaluator and equity calculator in pure Pyt
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/poker_oracle.git
-cd poker_oracle
+git clone https://github.com/atagoker/pokercheatsheet.git
+cd pokercheatsheet
 ```
 
 That's it. No `pip install` required.
@@ -35,10 +35,10 @@ That's it. No `pip install` required.
 
 ## Quick start
 
-Run the built-in demo — 3 randomly dealt equity simulations:
+Run the built-in demo. 3 randomly dealt equity simulations:
 
 ```bash
-python poker_oracle.py
+python pokercheatsheet.py
 ```
 
 Example output (yours will differ every run):
@@ -113,7 +113,7 @@ Cards are two-character strings: **rank** + **suit**.
 Evaluate a 5-card hand.
 
 ```python
-from poker_oracle import rank_hand, hand_name
+from pokercheatsheet import rank_hand, hand_name
 
 score = rank_hand(['As', 'Ks', 'Qs', 'Js', 'Ts'])
 print(score)             # (8, [12, 11, 10, 9, 8])
@@ -129,7 +129,7 @@ Returns `(hand_rank, tiebreakers)` where `hand_rank` is an int 0–8 and `tiebre
 Find the best 5-card hand from 7 cards (2 hole + 5 board).
 
 ```python
-from poker_oracle import best_hand_from_7, hand_name
+from pokercheatsheet import best_hand_from_7, hand_name
 
 hole  = ['Ah', 'Kh']
 board = ['Qh', 'Jh', 'Th', '2c', '7d']
@@ -148,7 +148,7 @@ Tries all C(7,5) = 21 combinations and returns the highest-scoring five.
 Estimate each player's win probability via Monte Carlo simulation.
 
 ```python
-from poker_oracle import equity
+from pokercheatsheet import equity
 
 # Pre-flop: Aces vs Kings
 eq = equity([['As', 'Ad'], ['Kh', 'Kd']])
@@ -185,7 +185,7 @@ Ties are split evenly between all winners. Results vary slightly between runs �
 Return a colorized terminal string for a list of cards.
 
 ```python
-from poker_oracle import pretty_hand
+from pokercheatsheet import pretty_hand
 print(pretty_hand(['Ah', 'Kh', 'Qh']))   # A♥  K♥  Q♥  (red in terminal)
 ```
 
@@ -207,8 +207,8 @@ print(pretty_hand(['Ah', 'Kh', 'Qh']))   # A♥  K♥  Q♥  (red in terminal)
 ## Project structure
 
 ```
-poker_oracle/
-├── poker_oracle.py   # full library + CLI demo
+pokercheatsheet/
+├── pokercheatsheet.py   # full library + CLI demo
 └── README.md
 ```
 
