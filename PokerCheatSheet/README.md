@@ -1,4 +1,4 @@
-# Poker_Cheat_Sheet 
+# Poker Cheat Sheet 
 
 A zero-dependency Texas Hold'em hand evaluator and equity calculator in pure Python. Evaluate hands, find the best 5-card combo from 7 cards, and run Monte Carlo equity simulations — all from the command line or as an importable module.
 
