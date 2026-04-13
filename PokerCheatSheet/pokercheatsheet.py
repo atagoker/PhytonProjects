@@ -1,19 +1,19 @@
 """
-poker_oracle.py
+pokercheatsheet.py
 ===============
-A zero-dependency Texas Hold'em hand evaluator and equity calculator.
+a zero-dependency Texas Hold'em hand evaluator and equity calculator.
 
-Features:
-  - Evaluate any 5-card hand (rank + name)
-  - Find the best 5-card hand from 7 community cards
-  - Run Monte Carlo equity simulations for multiple players
-  - Pretty-print cards with Unicode suit symbols
+features:
+  - evaluate any 5-card hand (rank + name)
+  - find the best 5-card hand from 7 community cards
+  - run Monte Carlo equity simulations for multiple players
+  - pretty-print cards with Unicode suit symbols
 
-Usage:
-  python poker_oracle.py                  # run built-in demo
-  python poker_oracle.py --sim            # quick equity sim example
+usage:
+  python pokercheatsheet.py                  # run built-in demo
+  python pokercheatsheet.py --sim            # quick equity sim example
 
-Author: <your name>
+Author: Ata Goker
 License: MIT
 """
 
