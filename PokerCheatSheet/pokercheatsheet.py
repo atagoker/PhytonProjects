@@ -270,7 +270,7 @@ def _demo():
 
     print("\n" + "=" * 52)
     print("  Re-run any time for a fresh random deal.")
-    print("  Import: from poker_oracle import equity, best_hand_from_7")
+    print("  Import: from pokercheatsheet import equity, best_hand_from_7")
     print("=" * 52 + "\n")
 
 
