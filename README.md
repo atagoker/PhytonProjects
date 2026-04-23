@@ -1,4 +1,4 @@
-# PhytonProjects — Just for Fun, Always for Growth
+# PhytonProjects
 
 Welcome to PhytonProjects — a collection of small, curious, and often experimental Python projects that I work on simply because I enjoy building things. This isn’t just a code repository; it’s a digital playground, a learning journey, and a public notebook of ideas I've brought to life, one line of code at a time.
 
